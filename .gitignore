@@ -1,0 +1,8 @@
+# Ignore node_modules (if you add a backend or use Node)
+node_modules/
+
+# Ignore local environment files
+.env
+
+# Ignore macOS system files
+.DS_Store

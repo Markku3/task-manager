@@ -1,0 +1,102 @@
+Esimerkki: Kolme SQL-taulua Task Manageriin
+users
+Käyttäjätietojen tallennus (rekisteröityminen, kirjautuminen)
+
+id (PRIMARY KEY)
+username
+password_hash
+email
+created_at
+tasks
+Käyttäjän tehtävät (CRUD)
+
+id (PRIMARY KEY)
+user_id (FOREIGN KEY → users.id)
+title
+description
+is_completed
+due_date
+created_at
+categories
+Tehtäväkategorioiden tallennus (esim. "Koulu", "Koti", "Harrastus")
+
+id (PRIMARY KEY)
+name
+Lisäksi voit lisätä tasks-tauluun sarakkeen category_id (FOREIGN KEY → categories.id), niin jokainen tehtävä voi kuulua kategoriaan.
+
+
+
+
+
+
+-----------------
+
+Esimerkkikaavio (teksti)
+Code
+
+
+
+
+users
+-----
+id (PK)
+username
+password_hash
+email
+created_at
+
+tasks
+-----
+id (PK)
+user_id (FK)
+title
+description
+is_completed
+due_date
+created_at
+category_id (FK)
+
+categories
+----------
+id (PK)
+
+
+
+
+
+------------------------------------------------------
+
+Esimerkkikyselyt
+SQL
+
+
+
+
+-- Luo users-taulu
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    email TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Luo categories-taulu
+CREATE TABLE categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+-- Luo tasks-taulu
+CREATE TABLE tasks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    is_completed INTEGER DEFAULT 0,
+    due_date DATE,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    category_id INTEGER,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(category_id) REFERENCES categories(id)
+);
