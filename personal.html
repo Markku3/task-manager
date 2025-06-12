@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Task Manager - Home</title>
+    <title>Personal Info - Task Manager</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -19,16 +19,19 @@
         </div>
         <div class="container glass">
             <header>
-                <h1><span class="neon">Task Manager</span></h1>
+                <h1><span class="neon">Personal Info</span></h1>
+                <p class="note">You can see all your tasks below. Edit or delete active tasks. You can also delete completed tasks if you wish.</p>
             </header>
-            <form id="task-form">
-                <input type="text" id="task-title" placeholder="Task Title" required>
-                <input type="text" id="task-desc" placeholder="Task Description">
-                <button type="submit" class="neon-btn">Add Task</button>
-            </form>
-            <ul id="task-list"></ul>
+            <div>
+                <h2 class="section-title">Active Tasks</h2>
+                <ul id="task-list-active"></ul>
+            </div>
+            <div>
+                <h2 class="section-title">Completed Tasks</h2>
+                <ul id="task-list-done"></ul>
+            </div>
             <footer>
-                <p><a href="personal.html">Go to Personal Info</a></p>
+                <p><a href="index.html">Back to Task Page</a></p>
             </footer>
         </div>
     </div>
@@ -57,6 +60,6 @@
             }
         });
     </script>
-    <script src="app.js"></script>
+    <script src="personal.js"></script>
 </body>
 </html>
