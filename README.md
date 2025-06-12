@@ -14,10 +14,11 @@ A simple web-based task manager. You can add, view, and delete tasks. Tasks are 
 
 ## How to Use
 
-1. Open `index.html` in your browser.
-2. Add a task using the form.
-3. View your tasks in the list.
-4. Delete a task by clicking the "Delete" button.
+1. Open `auth.html` in your browser.
+2. Sign in/make a new account.
+3. Add a task using the form.
+4. View your tasks in the list.
+5. Delete a task by clicking the "Delete" button.
 
 ## Technologies Used
 
