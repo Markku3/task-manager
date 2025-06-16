@@ -94,7 +94,7 @@ Lisään tähän kuvat esimerkiksi: !!!!!!!!
 Kuvien lisääminen:
 ```md
 ![Etusivu](./screenshots/etusivu.png)
-![Editointi](./kuvat/edit.png)
+![Editointi](kuvat/edit.png)
 
 ```
 
@@ -103,7 +103,7 @@ Kuvien lisääminen:
 ## 🚀 Sovelluksen käynnistäminen
 
 ```bash
-git clone https://github.com/kayttaja/projekti.git
+git clone https://github.com/Markku3/task-manager.git
 cd projekti
 npm install
 npm start
@@ -113,4 +113,4 @@ npm start
 
 ## 🏁 Yhteenveto
 
-Tämä sovellus on näyttöni ohjelmoinnista ja ohjelmistokehittäjänä toimimisesta. Se kattaa tekniset taidot, tiimityön, käyttäjäkokemuksen sekä CRUD- ja tietoturvanäkökulmat.
+Tämä sovellus on näyttöni ohjelmoinnista ja ohjelmistokehittäjänä toimimisesta. Se kattaa tekniset taidot, käyttäjäkokemuksen sekä CRUD- ja tietoturvanäkökulmat.
