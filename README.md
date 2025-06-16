@@ -96,14 +96,14 @@ Lisään tähän kuvat esimerkiksi: !!!!!!!!
 ### 🔐 Kirjautumissivu
 ![Kirjautumissivu](kuvat/etusivu.png)
 
+### 🔐 Etusivu
+![Etusivu](kuvat/taskSivu)
+
 ### ➕ Uuden tehtävän lisääminen
 ![Lisääminen](kuvat/edit.png)
 
 ### 📋 Personal Info -sivu
 ![Admin](kuvat/personal.png)
-
-### 🔐 Etusivu
-![Etusivu](kuvat/taskSivu)
 
 ### 📋 Hampurilaismenu
 ![Hamppari](kuvat/hamppari.png)
