@@ -91,10 +91,18 @@ Lisään tähän kuvat esimerkiksi: !!!!!!!!
 - Personal info -sivusta
 - Hampurilaisvalikosta
 
-Kuvien lisääminen:
-```md
+## 🖼️ Kuvia sovelluksesta
+
+### 🔐 Kirjautumissivu
+![Kirjautumissivu](images/login.png)
+
+### ➕ Uuden tehtävän lisääminen
+![Uusi tehtävä](kuvat/edit.png)
+
+### 📋 Personal Info -sivu
+![Personal Info](images/personal-info.png)
 ![Etusivu](./screenshots/etusivu.png)
-![Editointi](kuvat/edit.png)
+
 
 ```
 
