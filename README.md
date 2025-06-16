@@ -1,39 +1,114 @@
-# task-manager
-Simple web-based task manager for school project
+# 📝 To-do-sovellus – Näyttötyö
 
+## 👤 Tekijä
 
-# Simple Task Manager
-
-A simple web-based task manager. You can add, view, and delete tasks. Tasks are stored in your browser using localStorage.
-
-## Features
-
-- Add a new task with a title and description
-- View all tasks in a list
-- Delete tasks
-
-## How to Use
-
-1. Open `auth.html` in your browser.
-2. Sign in/make a new account.
-3. Add a task using the form.
-4. View your tasks in the list.
-5. Delete a task by clicking the "Delete" button.
-
-## Technologies Used
-
-- HTML
-- CSS
-- JavaScript (Vanilla)
-- localStorage (for saving tasks in the browser)
-
-## Future Improvements
-
-- Edit tasks
-- Mark tasks as done
-- Add due dates and priorities
-- User authentication and backend storage
+- **Nimi:** Mariel H
+- **Koulutus:** Taitotalo / ICT, WEB14
+- **Ajankohta:** 26.06.2025
 
 ---
 
-This project is created for a school assignment to demonstrate basic programming, planning, and version control skills.
+## 🔍 Projektin kuvaus
+
+Tämä on to-do-sovellus, jonka avulla käyttäjät voivat:
+
+- Rekisteröityä ja kirjautua sisään
+- Lisätä tehtäviä (task)
+- Merkitä tehtäviä tehdyiksi
+- Muokata tai poistaa tehtäviä
+- Tarkastella aktiivisia ja tehtyjä tehtäviä omalla sivullaan
+
+Sovelluksessa on hampurilaisvalikko, joka näyttää käyttäjänimen ja tarjoaa uloskirjautumismahdollisuuden.
+
+---
+
+## 🧱 Käytetyt teknologiat
+
+| Osa                | Teknologia                        |
+| ------------------ | --------------------------------- |
+| Frontend           | EJS / HTML + CSS + JS tms         |
+| Backend            | Node.js + Express                 |
+| Autentikointi      | SQL (MySQL)                       |
+| Taskien tallennus  | MongoDB                           |
+| Versionhallinta    | Git + GitHub                      |
+| Kehitysympäristö   | Visual Studio Code                |
+
+---
+
+## ⚙️ CRUD-toiminnot
+
+| Toiminto | Kuvaus                                          |
+| -------- | ----------------------------------------------- |
+| Create   | Käyttäjä voi lisätä uuden tehtävän              |
+| Read     | Tehtävät listataan aktiivisina ja tehtyinä      |
+| Update   | Tehtävää voi muokata ja merkitä tehdyksi        |
+| Delete   | Tehtävä voidaan poistaa (aktiivinen tai valmis) |
+
+---
+
+## 🧭 Käyttöliittymä
+
+- **Etusivu:** Rekisteröityminen ja kirjautuminen
+- **Tehtäväsivu:** Taskin lisääminen ja listaaminen
+- **Personal Info -sivu:** Näyttää aktiiviset ja valmiit tehtävät, mahdollisuus muokata ja poistaa
+- **Hampurilaismenu:** Käyttäjänimi ja logout
+
+---
+
+## 🔐 Tietoturva
+
+- Käyttäjän tunnistaminen SQL-tietokannan kautta
+- Tehtävät näkyvät vain kirjautuneelle käyttäjälle
+- MongoDB tallentaa tehtävät käyttäjäkohtaisesti
+- Logout-toiminto tyhjentää session/tokenin
+
+---
+
+## 🤝 Työskentely ohjelmistokehitystiimissä
+
+- Sopiminen tehtävistä
+- Yhteinen suunnittelu ja toteutuksen aikataulutus
+- Yhdessä testaus ja virheiden ratkaisu
+- Oman roolin arviointi ja jatkuva kehitys
+
+---
+
+## 🧠 Oppiminen ja arviointi
+
+- Opin yhdistämään SQL ja MongoDB samaan projektiin
+- Opin käyttöliittymän ja toiminnallisuuden yhteensovittamista
+- Kehitin taitojani versioinnissa ja virheenkorjauksessa
+- Ymmärsin paremmin tietoturvan ja käyttäjähallinnan merkityksen
+
+---
+
+## 📸 Kuvakaappauksia
+
+Lisään tähän kuvat esimerkiksi: !!!!!!!! 
+
+- Etusivusta (login/rekisteröityminen)
+- Taskin lisäyksestä
+- Personal info -sivusta
+- Hampurilaisvalikosta
+
+Kuvien lisääminen:
+```md
+![Etusivu](./screenshots/etusivu.png)
+```
+
+---
+
+## 🚀 Sovelluksen käynnistäminen
+
+```bash
+git clone https://github.com/kayttaja/projekti.git
+cd projekti
+npm install
+npm start
+```
+
+---
+
+## 🏁 Yhteenveto
+
+Tämä sovellus on näyttöni ohjelmoinnista ja ohjelmistokehittäjänä toimimisesta. Se kattaa tekniset taidot, tiimityön, käyttäjäkokemuksen sekä CRUD- ja tietoturvanäkökulmat.
