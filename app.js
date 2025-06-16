@@ -4,7 +4,8 @@ const taskDesc = document.getElementById('task-desc');
 const taskList = document.getElementById('task-list');
 const username = localStorage.getItem('currentUser');
 
-if (!username) window.location.href = 'auth.html';
+// Redirect to /auth if not signed in
+if (!username) window.location.href = '/auth';
 
 function getTasks() {
     return JSON.parse(localStorage.getItem('tasks_' + username)) || [];

@@ -2,11 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const path = require('path');
-let publicPath = path.join(__dirname, '.');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/taskmanager', {
     useNewUrlParser: true,
@@ -22,10 +21,20 @@ const User = mongoose.model('User', userSchema);
 
 app.use(cors());
 app.use(express.json());
-app.get("/home", (req, res) => {
-    res.sendFile(`${publicPath}/auth.html`);
-});
 
+// Set view engine to EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Serve all static files (JS, CSS, images)
+app.use(express.static(__dirname));
+
+// Routing for pages
+app.get('/', (req, res) => res.render('index'));
+app.get('/auth', (req, res) => res.render('auth'));
+app.get('/personal', (req, res) => res.render('personal'));
+
+// API endpoints (unchanged)
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ error: 'Missing fields' });

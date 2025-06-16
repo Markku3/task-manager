@@ -2,7 +2,8 @@ const taskListActive = document.getElementById('task-list-active');
 const taskListDone = document.getElementById('task-list-done');
 const username = localStorage.getItem('currentUser');
 
-if (!username) window.location.href = 'auth.html';
+// Redirect to /auth if not signed in
+if (!username) window.location.href = '/auth';
 
 function getTasks() {
     return JSON.parse(localStorage.getItem('tasks_' + username)) || [];

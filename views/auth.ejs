@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In - Task Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .auth-container { max-width: 350px; margin: 60px auto; }
+        .auth-form { display: flex; flex-direction: column; gap: 15px; }
+        .auth-form input { padding: 10px; border-radius: 6px; border: 1.5px solid #25263e; background: #23243c; color: #def; font-size: 1rem; }
+        .auth-form button { margin-top: 8px; }
+        .auth-toggle { color: #00ffe7; cursor: pointer; margin-top: 6px; text-align: center; }
+        .auth-note { color: #87e1ec; text-align: center; margin-bottom: 18px; }
+        .auth-error { color: #ff6d6d; text-align: center; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container glass auth-container">
+        <header>
+            <h1><span class="neon">Task Manager</span></h1>
+        </header>
+        <div id="auth-box">
+            <div class="auth-note">Sign up for a new account or sign in to continue.</div>
+            <form id="auth-form" class="auth-form">
+                <input type="text" id="auth-username" placeholder="Username" autocomplete="username" required>
+                <input type="password" id="auth-password" placeholder="Password" autocomplete="current-password" required>
+                <button type="submit" class="neon-btn" id="auth-btn">Sign In</button>
+            </form>
+            <div class="auth-toggle" id="toggle-link">Don't have an account? Sign up</div>
+        </div>
+        <div class="auth-error" id="auth-error" style="display:none;"></div>
+    </div>
+    <script src="/auth.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
-// Redirect to index.html if already signed in
+// Redirect to / if already signed in
 if (localStorage.getItem('currentUser')) {
-    window.location.href = 'index.html';
+    window.location.href = '/';
 }
 
 const apiBase = 'http://localhost:3000/api';
@@ -69,7 +69,7 @@ authForm.onsubmit = async function(e) {
             return;
         }
         localStorage.setItem('currentUser', username);
-        window.location.href = 'index.html';
+        window.location.href = '/';
     } else {
         const result = await login(username, password);
         if (result.error) {
@@ -77,6 +77,6 @@ authForm.onsubmit = async function(e) {
             return;
         }
         localStorage.setItem('currentUser', username);
-        window.location.href = 'index.html';
+        window.location.href = '/';
     }
 };
