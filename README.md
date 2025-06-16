@@ -94,15 +94,16 @@ Lisään tähän kuvat esimerkiksi: !!!!!!!!
 ## 🖼️ Kuvia sovelluksesta
 
 ### 🔐 Kirjautumissivu
-![Kirjautumissivu](images/login.png)
+![Kirjautumissivu](kuvat/etusivu.png)
 
 ### ➕ Uuden tehtävän lisääminen
-![Uusi tehtävä](kuvat/edit.png)
+![Lisääminen](kuvat/edit.png)
 
 ### 📋 Personal Info -sivu
-![Personal Info](images/personal-info.png)
-![Etusivu](./screenshots/etusivu.png)
+![Admin](kuvat/personal.png)
 
+### 🔐 Etusivu
+![Etusivu](kuvat/taskSivu)
 
 ```
 
