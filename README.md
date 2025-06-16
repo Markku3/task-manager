@@ -97,7 +97,7 @@ Lisään tähän kuvat esimerkiksi: !!!!!!!!
 ![Kirjautumissivu](kuvat/etusivu.png)
 
 ### 🔐 Etusivu
-![Etusivu](kuvat/taskSivu)
+![Etusivu](kuvat/taskSivu.png)
 
 ### ➕ Uuden tehtävän lisääminen
 ![Lisääminen](kuvat/edit.png)
