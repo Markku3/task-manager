@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const app = express();
+const path = require('path');
+let publicPath = path.join(__dirname, '.');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/taskmanager', {
     useNewUrlParser: true,
@@ -20,6 +22,9 @@ const User = mongoose.model('User', userSchema);
 
 app.use(cors());
 app.use(express.json());
+app.get("/home", (req, res) => {
+    res.sendFile(`${publicPath}/auth.html`);
+});
 
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
