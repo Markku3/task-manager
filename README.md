@@ -94,6 +94,8 @@ Lisään tähän kuvat esimerkiksi: !!!!!!!!
 Kuvien lisääminen:
 ```md
 ![Etusivu](./screenshots/etusivu.png)
+![Editointi](./kuvat/edit.png)
+
 ```
 
 ---
