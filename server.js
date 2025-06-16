@@ -1,15 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
+
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/taskmanager', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/taskmanager', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    email: String,
     created_at: { type: Date, default: Date.now }
 });
 const User = mongoose.model('User', userSchema);
@@ -17,13 +21,12 @@ const User = mongoose.model('User', userSchema);
 app.use(cors());
 app.use(express.json());
 
-// Register endpoint
 app.post('/api/register', async (req, res) => {
-    const { username, password, email } = req.body;
+    const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ error: 'Missing fields' });
-    const hashedPassword = await bcrypt.hash(password, 10);
     try {
-        const user = new User({ username, password: hashedPassword, email });
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = new User({ username, password: hashedPassword });
         await user.save();
         res.status(201).json({ message: 'User created' });
     } catch (e) {
@@ -31,7 +34,6 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-// Login endpoint
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
