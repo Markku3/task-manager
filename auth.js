@@ -3,6 +3,7 @@ if (localStorage.getItem('currentUser')) {
     window.location.href = 'index.html';
 }
 
+const apiBase = 'http://localhost:3000/api';
 const authForm = document.getElementById('auth-form');
 const authBtn = document.getElementById('auth-btn');
 const toggleLink = document.getElementById('toggle-link');
@@ -32,28 +33,47 @@ toggleLink.onclick = function() {
     clearError();
 };
 
-authForm.onsubmit = function(e) {
+async function register(username, password) {
+    const res = await fetch(`${apiBase}/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    });
+    return await res.json();
+}
+
+async function login(username, password) {
+    const res = await fetch(`${apiBase}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    });
+    return await res.json();
+}
+
+authForm.onsubmit = async function(e) {
     e.preventDefault();
     clearError();
     const username = document.getElementById('auth-username').value.trim();
     const password = document.getElementById('auth-password').value;
+
     if (!username || !password) {
         showError("Please fill in both fields.");
         return;
     }
-    let users = JSON.parse(localStorage.getItem('users') || '{}');
+
     if (mode === 'signup') {
-        if (users[username]) {
-            showError("Username already exists.");
+        const result = await register(username, password);
+        if (result.error) {
+            showError(result.error);
             return;
         }
-        users[username] = { password };
-        localStorage.setItem('users', JSON.stringify(users));
         localStorage.setItem('currentUser', username);
         window.location.href = 'index.html';
     } else {
-        if (!users[username] || users[username].password !== password) {
-            showError("Incorrect username or password.");
+        const result = await login(username, password);
+        if (result.error) {
+            showError(result.error);
             return;
         }
         localStorage.setItem('currentUser', username);
