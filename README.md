@@ -26,7 +26,7 @@ Sovelluksessa on hampurilaisvalikko, joka näyttää käyttäjänimen ja tarjoaa
 
 | Osa                | Teknologia                        |
 | ------------------ | --------------------------------- |
-| Frontend           | EJS / HTML + CSS + JS tms         |
+| Frontend           | EJS / HTML + CSS + JS         |
 | Backend            | Node.js + Express                 |
 | Autentikointi      | SQL (MySQL)                       |
 | Taskien tallennus  | MongoDB                           |
