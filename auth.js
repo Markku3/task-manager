@@ -3,7 +3,6 @@ if (localStorage.getItem('currentUser')) {
     window.location.href = '/';
 }
 
-const apiBase = 'http://localhost:3000/api';
 const authForm = document.getElementById('auth-form');
 const authBtn = document.getElementById('auth-btn');
 const toggleLink = document.getElementById('toggle-link');
@@ -34,7 +33,7 @@ toggleLink.onclick = function() {
 };
 
 async function register(username, password) {
-    const res = await fetch(`${apiBase}/register`, {
+    const res = await fetch('/api/sqlite/register', { // <--- relative path!
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -43,7 +42,7 @@ async function register(username, password) {
 }
 
 async function login(username, password) {
-    const res = await fetch(`${apiBase}/login`, {
+    const res = await fetch('/api/sqlite/login', { // <--- relative path!
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
