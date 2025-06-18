@@ -22,6 +22,12 @@ Sovelluksessa on hampurilaisvalikko, joka näyttää käyttäjänimen ja tarjoaa
 
 ---
 
+## 🧭 Palvelun tarkoitus ja käyttäjät
+
+![Tarkoitus](kuvat/PalvelunTarkoitus)
+
+---
+
 ## 🧱 Käytetyt teknologiat
 
 | Osa                | Teknologia                        |
