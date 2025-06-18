@@ -84,13 +84,6 @@ Sovelluksessa on hampurilaisvalikko, joka näyttää käyttäjänimen ja tarjoaa
 
 ## 📸 Kuvakaappauksia
 
-Lisään tähän kuvat esimerkiksi: !!!!!!!! 
-
-- Etusivusta (login/rekisteröityminen)
-- Taskin lisäyksestä
-- Personal info -sivusta
-- Hampurilaisvalikosta
-
 ## 🖼️ Kuvia sovelluksesta
 
 ### 🔐 Kirjautumissivu
