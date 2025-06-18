@@ -35,6 +35,114 @@ app.get('/', (req, res) => res.render('index'));
 app.get('/auth', (req, res) => res.render('auth'));
 app.get('/personal', (req, res) => res.render('personal'));
 
+// --- MongoDB Todo schema/model ---
+const todoSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  text: { type: String, required: true },
+  description: { type: String },
+  completed: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now }
+});
+const Todo = mongoose.model('Todo', todoSchema);
+
+// --- Helper: Get SQLite user_id from username ---
+function getSqliteUserId(username) {
+  return new Promise((resolve, reject) => {
+    sqliteDb.get('SELECT id FROM users WHERE username = ?', [username], (err, row) => {
+      if (err || !row) reject('User not found');
+      else resolve(row.id);
+    });
+  });
+}
+
+// --- GET all todos for user ---
+app.get('/api/todos', async (req, res) => {
+  const username = req.query.username;
+  if (!username) return res.status(400).json({ error: 'Missing username' });
+  try {
+    // MongoDB
+    const user = await User.findOne({ username });
+    const mongoTodos = user ? await Todo.find({ userId: user._id }).lean() : [];
+    // SQLite
+    const sqliteUserId = await getSqliteUserId(username);
+    sqliteDb.all('SELECT * FROM todos WHERE user_id = ?', [sqliteUserId], (err, rows) => {
+      if (err) return res.status(500).json({ error: 'SQLite error' });
+      res.json({ mongo: mongoTodos, sqlite: rows });
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.toString() });
+  }
+});
+
+// --- CREATE todo ---
+app.post('/api/todos', async (req, res) => {
+  const { username, text, description = '' } = req.body;
+  if (!username || !text) return res.status(400).json({ error: 'Missing fields' });
+  try {
+    // MongoDB
+    const user = await User.findOne({ username });
+    const mongoTodo = user ? await Todo.create({ userId: user._id, text, description, completed: false }) : null;
+    // SQLite
+    const sqliteUserId = await getSqliteUserId(username);
+    sqliteDb.run(
+      'INSERT INTO todos (user_id, text, description, completed) VALUES (?, ?, ?, 0)',
+      [sqliteUserId, text, description],
+      function (err) {
+        if (err) return res.status(500).json({ error: 'SQLite error' });
+        res.json({ mongo: mongoTodo, sqlite: { id: this.lastID, user_id: sqliteUserId, text, description, completed: 0 } });
+      }
+    );
+  } catch (err) {
+    res.status(500).json({ error: err.toString() });
+  }
+});
+
+// --- UPDATE todo ---
+app.put('/api/todos/:id', async (req, res) => {
+  const { id } = req.params;
+  const { username, text, description, completed } = req.body;
+  if (!username) return res.status(400).json({ error: 'Missing username' });
+  try {
+    // MongoDB
+    const mongoTodo = await Todo.findByIdAndUpdate(id, { text, description, completed }, { new: true });
+    // SQLite
+    const sqliteUserId = await getSqliteUserId(username);
+    sqliteDb.run(
+      'UPDATE todos SET text = ?, description = ?, completed = ? WHERE id = ? AND user_id = ?',
+      [text, description, completed ? 1 : 0, id, sqliteUserId],
+      function (err) {
+        if (err) return res.status(500).json({ error: 'SQLite error' });
+        res.json({ mongo: mongoTodo, sqlite: { id, text, description, completed } });
+      }
+    );
+  } catch (err) {
+    res.status(500).json({ error: err.toString() });
+  }
+});
+
+// --- DELETE todo ---
+app.delete('/api/todos/:id', async (req, res) => {
+  const { id } = req.params;
+  const { username } = req.body;
+  if (!username) return res.status(400).json({ error: 'Missing username' });
+  try {
+    // MongoDB
+    await Todo.findByIdAndDelete(id);
+    // SQLite
+    const sqliteUserId = await getSqliteUserId(username);
+    sqliteDb.run(
+      'DELETE FROM todos WHERE id = ? AND user_id = ?',
+      [id, sqliteUserId],
+      function (err) {
+        if (err) return res.status(500).json({ error: 'SQLite error' });
+        res.json({ message: 'Todo deleted from both DBs' });
+      }
+    );
+  } catch (err) {
+    res.status(500).json({ error: err.toString() });
+  }
+});
+
 // API endpoints (unchanged)
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
