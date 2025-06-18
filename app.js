@@ -6,16 +6,21 @@ const username = localStorage.getItem('currentUser');
 
 if (!username) window.location.href = '/auth';
 
+// Remove legacy localStorage keys except currentUser
+Object.keys(localStorage).forEach(key => {
+  if (key !== 'currentUser') localStorage.removeItem(key);
+});
+
 async function fetchTodos() {
   const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
   const data = await res.json();
-  renderTodos(data.sqlite); // Show only SQLite todos for now
+  renderTodos(data.sqlite || []);
 }
 
 function renderTodos(todos) {
   taskList.innerHTML = '';
   todos.forEach(todo => {
-    if (todo.completed) return; // Only show non-completed
+    if (todo.completed) return;
     const li = document.createElement('li');
     li.className = 'task-item';
     li.innerHTML = `
@@ -40,24 +45,25 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;");
 }
 
-taskForm.onsubmit = async function (e) {
-  e.preventDefault();
-  const text = taskTitle.value.trim();
-  const description = taskDesc.value.trim();
-  if (text === '') return;
-  await fetch('/api/todos', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, text, description })
-  });
-  taskTitle.value = '';
-  taskDesc.value = '';
-  fetchTodos();
-};
+if (taskForm) {
+  taskForm.onsubmit = async function (e) {
+    e.preventDefault();
+    const text = taskTitle.value.trim();
+    const description = taskDesc.value.trim();
+    if (text === '') return;
+    await fetch('/api/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, text, description })
+    });
+    taskTitle.value = '';
+    taskDesc.value = '';
+    fetchTodos();
+  };
+}
 
 async function handleCheck(e) {
   const id = e.target.getAttribute('data-id');
-  // Get current todo to update
   const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
   const data = await res.json();
   const todo = data.sqlite.find(t => t.id == id);
@@ -85,4 +91,4 @@ async function handleDelete(e) {
   fetchTodos();
 }
 
-window.onload = fetchTodos;
+if (taskList) window.onload = fetchTodos;

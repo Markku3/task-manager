@@ -36,19 +36,12 @@
         </div>
     </div>
     <script>
-        // Redirect to /auth if not signed in
-        if (!localStorage.getItem('currentUser')) {
-            window.location.href = '/auth';
-        }
+
         // Show username in menu
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('current-user').textContent = localStorage.getItem('currentUser') || '';
         });
-        // Sign out
-        document.getElementById('signout-btn').onclick = function() {
-            localStorage.removeItem('currentUser');
-            window.location.href = '/auth';
-        };
+
     </script>
     <script src="/personal.js"></script>
     <script src="/hamburger.js"></script>

@@ -8,17 +8,18 @@ require('dotenv').config();
 
 const app = express();
 
-//mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/taskmanager', {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true
-//});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/naytto', {
+   useNewUrlParser: true,   
+    useUnifiedTopology: true
+});
 
-/*const userSchema = new mongoose.Schema({
+// --- Add User Schema/Model (UNCOMMENTED and in use!) ---
+const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     created_at: { type: Date, default: Date.now }
-});*/
-// const User = mongoose.model('User', userSchema);
+});
+const User = mongoose.model('User', userSchema);
 
 app.use(cors());
 app.use(express.json());
@@ -35,7 +36,7 @@ app.get('/', (req, res) => res.render('index'));
 app.get('/auth', (req, res) => res.render('auth'));
 app.get('/personal', (req, res) => res.render('personal'));
 
-// --- MongoDB Todo schema/model ---
+// --- MongoDB Todo schema/model (after userSchema) ---
 const todoSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   text: { type: String, required: true },
@@ -101,22 +102,28 @@ app.post('/api/todos', async (req, res) => {
 app.put('/api/todos/:id', async (req, res) => {
   const { id } = req.params;
   const { username, text, description, completed } = req.body;
-  if (!username) return res.status(400).json({ error: 'Missing username' });
+  if (!username || !text) return res.status(400).json({ error: 'Missing data' });
+
   try {
-    // MongoDB
-    const mongoTodo = await Todo.findByIdAndUpdate(id, { text, description, completed }, { new: true });
-    // SQLite
-    const sqliteUserId = await getSqliteUserId(username);
-    sqliteDb.run(
-      'UPDATE todos SET text = ?, description = ?, completed = ? WHERE id = ? AND user_id = ?',
-      [text, description, completed ? 1 : 0, id, sqliteUserId],
-      function (err) {
-        if (err) return res.status(500).json({ error: 'SQLite error' });
-        res.json({ mongo: mongoTodo, sqlite: { id, text, description, completed } });
-      }
-    );
+    // Get user_id from SQLite
+    sqliteDb.get('SELECT id FROM users WHERE username = ?', [username], (err, user) => {
+      if (err || !user) return res.status(404).json({ error: 'User not found' });
+
+      sqliteDb.run(
+        `UPDATE todos SET text = ?, description = ?, completed = ? WHERE id = ? AND user_id = ?`,
+        [text, description, completed, id, user.id],
+        function (err) {
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to update todo' });
+          }
+          res.json({ success: true });
+        }
+      );
+    });
   } catch (err) {
-    res.status(500).json({ error: err.toString() });
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -125,21 +132,26 @@ app.delete('/api/todos/:id', async (req, res) => {
   const { id } = req.params;
   const { username } = req.body;
   if (!username) return res.status(400).json({ error: 'Missing username' });
+
   try {
-    // MongoDB
-    await Todo.findByIdAndDelete(id);
-    // SQLite
-    const sqliteUserId = await getSqliteUserId(username);
-    sqliteDb.run(
-      'DELETE FROM todos WHERE id = ? AND user_id = ?',
-      [id, sqliteUserId],
-      function (err) {
-        if (err) return res.status(500).json({ error: 'SQLite error' });
-        res.json({ message: 'Todo deleted from both DBs' });
-      }
-    );
+    sqliteDb.get('SELECT id FROM users WHERE username = ?', [username], (err, user) => {
+      if (err || !user) return res.status(404).json({ error: 'User not found' });
+
+      sqliteDb.run(
+        `DELETE FROM todos WHERE id = ? AND user_id = ?`,
+        [id, user.id],
+        function (err) {
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Failed to delete todo' });
+          }
+          res.json({ success: true });
+        }
+      );
+    });
   } catch (err) {
-    res.status(500).json({ error: err.toString() });
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

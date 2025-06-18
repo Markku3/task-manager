@@ -1,52 +1,56 @@
+// ...existing code...
 const taskListActive = document.getElementById('task-list-active');
 const taskListDone = document.getElementById('task-list-done');
 const username = localStorage.getItem('currentUser');
 
-// Redirect to /auth if not signed in
 if (!username) window.location.href = '/auth';
 
-function getTasks() {
-    return JSON.parse(localStorage.getItem('tasks_' + username)) || [];
-}
-function saveTasks(tasks) {
-    localStorage.setItem('tasks_' + username, JSON.stringify(tasks));
+async function fetchTodos() {
+    const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+    const data = await res.json();
+    renderTodos(data.sqlite || []);
 }
 
-function loadTasks() {
-    const tasks = getTasks();
+function renderTodos(todos) {
+    console.log('Todos:', todos); // Add this line
     taskListActive.innerHTML = '';
     taskListDone.innerHTML = '';
-
-    tasks.forEach((task, index) => {
+    todos.forEach(todo => {
+        const isDone = Number(todo.completed) === 1;
         const li = document.createElement('li');
-        li.className = 'task-item' + (task.done ? ' done' : '');
-        if (task.done) {
+        li.className = 'task-item' + (isDone ? ' done' : '');
+        if (isDone) {
             li.innerHTML = `
-                <span class="task-title">${escapeHtml(task.title)}</span>
-                <span class="task-desc">${escapeHtml(task.desc)}</span>
+                <span class="task-title">${escapeHtml(todo.text)}</span>
+                <span class="task-desc">${escapeHtml(todo.description || '')}</span>
                 <span class="task-done-badge">Done</span>
                 <div class="task-actions">
-                    <button class="delete-btn" data-index="${index}">Delete</button>
+                    <button class="delete-btn" data-id="${todo.id}">Delete</button>
                 </div>
             `;
             taskListDone.appendChild(li);
         } else {
             li.innerHTML = `
-                <span class="task-title">${escapeHtml(task.title)}</span>
-                <span class="task-desc">${escapeHtml(task.desc)}</span>
+                <span class="task-title">${escapeHtml(todo.text)}</span>
+                <span class="task-desc">${escapeHtml(todo.description || '')}</span>
                 <div class="task-actions">
-                    <button class="edit-btn" data-index="${index}">Edit</button>
-                    <button class="delete-btn" data-index="${index}">Delete</button>
+                    <button class="edit-btn" data-id="${todo.id}">Edit</button>
+                    <button class="delete-btn" data-id="${todo.id}">Delete</button>
+                    <input type="checkbox" class="task-checkbox" data-id="${todo.id}" title="Mark as done">
                 </div>
             `;
             taskListActive.appendChild(li);
         }
     });
 
-    document.querySelectorAll('.edit-btn').forEach(btn =>
-        btn.addEventListener('click', handleEdit));
+    // Attach event listeners for all delete buttons (both lists)
     document.querySelectorAll('.delete-btn').forEach(btn =>
         btn.addEventListener('click', handleDelete));
+    // Only attach edit and checkbox for active tasks
+    document.querySelectorAll('.edit-btn').forEach(btn =>
+        btn.addEventListener('click', handleEdit));
+    document.querySelectorAll('.task-checkbox').forEach(cb =>
+        cb.addEventListener('change', handleCheck));
 }
 
 function escapeHtml(str) {
@@ -57,25 +61,58 @@ function escapeHtml(str) {
         .replace(/"/g, "&quot;");
 }
 
-function handleDelete(e) {
-    const index = parseInt(e.target.getAttribute('data-index'));
-    const tasks = getTasks();
-    tasks.splice(index, 1);
-    saveTasks(tasks);
-    loadTasks();
+async function handleDelete(e) {
+    const id = e.target.getAttribute('data-id');
+    await fetch(`/api/todos/${id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username })
+    });
+    fetchTodos();
 }
 
-function handleEdit(e) {
-    const index = parseInt(e.target.getAttribute('data-index'));
-    const tasks = getTasks();
-    const task = tasks[index];
-    const newTitle = prompt("Edit Task Title:", task.title);
-    const newDesc = prompt("Edit Task Description:", task.desc);
+async function handleEdit(e) {
+    const id = e.target.getAttribute('data-id');
+    const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+    const data = await res.json();
+    const todo = (data.sqlite || []).find(t => t.id == id);
+    if (!todo) return;
+    const newTitle = prompt("Edit Task Title:", todo.text);
+    const newDesc = prompt("Edit Task Description:", todo.description || '');
     if (newTitle !== null) {
-        tasks[index] = { ...task, title: newTitle, desc: newDesc !== null ? newDesc : task.desc };
-        saveTasks(tasks);
-        loadTasks();
+        await fetch(`/api/todos/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username,
+                text: newTitle,
+                description: newDesc !== null ? newDesc : todo.description,
+                completed: todo.completed
+            })
+        });
+        fetchTodos();
     }
 }
 
-window.onload = loadTasks;
+async function handleCheck(e) {
+    const id = e.target.getAttribute('data-id');
+    const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+    const data = await res.json();
+    const todo = (data.sqlite || []).find(t => t.id == id);
+    if (!todo) return;
+    await fetch(`/api/todos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username,
+            text: todo.text,
+            description: todo.description,
+            completed: 1
+        })
+    });
+    fetchTodos();
+}
+
+window.onload = fetchTodos;
+// ...existing code...
+
