@@ -33,7 +33,7 @@ Sovelluksessa on hampurilaisvalikko, joka näyttää käyttäjänimen ja tarjoaa
 | ------------------ | --------------------------------- |
 | Frontend           | EJS / HTML + CSS + JS         |
 | Backend            | Node.js + Express                 |
-| Autentikointi      | SQL (MySQL)                       |
+| Autentikointi      | SQL                               |
 | Taskien tallennus  | MongoDB                           |
 | Versionhallinta    | Git + GitHub                      |
 | Kehitysympäristö   | Visual Studio Code                |
