@@ -36,12 +36,22 @@
         </div>
     </div>
     <script>
-
-        // Show username in menu
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('current-user').textContent = localStorage.getItem('currentUser') || '';
+        // Show username in menu using session
+        document.addEventListener('DOMContentLoaded', async function() {
+            const res = await fetch('/api/me');
+            if (res.ok) {
+                const data = await res.json();
+                document.getElementById('current-user').textContent = data.username;
+            } else {
+                window.location.href = '/auth';
+            }
         });
 
+        // Sign out
+        document.getElementById('signout-btn').onclick = async function() {
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.href = '/auth';
+        };
     </script>
     <script src="/personal.js"></script>
     <script src="/hamburger.js"></script>

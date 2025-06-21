@@ -2,9 +2,6 @@ const taskForm = document.getElementById('task-form');
 const taskTitle = document.getElementById('task-title');
 const taskDesc = document.getElementById('task-desc');
 const taskList = document.getElementById('task-list');
-const username = localStorage.getItem('currentUser');
-
-if (!username) window.location.href = '/auth';
 
 // Remove legacy localStorage keys except currentUser
 Object.keys(localStorage).forEach(key => {
@@ -12,7 +9,7 @@ Object.keys(localStorage).forEach(key => {
 });
 
 async function fetchTodos() {
-  const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+  const res = await fetch('/api/todos');
   const data = await res.json();
   renderTodos(data.sqlite || []);
 }
@@ -20,7 +17,7 @@ async function fetchTodos() {
 function renderTodos(todos) {
   taskList.innerHTML = '';
   todos.forEach(todo => {
-    if (todo.completed) return;
+    if (Number(todo.completed) === 1) return; // Only show active (not done) todos
     const li = document.createElement('li');
     li.className = 'task-item';
     li.innerHTML = `
@@ -51,28 +48,33 @@ if (taskForm) {
     const text = taskTitle.value.trim();
     const description = taskDesc.value.trim();
     if (text === '') return;
-    await fetch('/api/todos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, text, description })
-    });
+    await createTodo(text, description);
     taskTitle.value = '';
     taskDesc.value = '';
     fetchTodos();
   };
 }
 
+// Creating a todo:
+async function createTodo(text, description) {
+  await fetch('/api/todos', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, description })
+  });
+}
+
 async function handleCheck(e) {
   const id = e.target.getAttribute('data-id');
-  const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+  // Get the todo to update its text/desc
+  const res = await fetch('/api/todos');
   const data = await res.json();
-  const todo = data.sqlite.find(t => t.id == id);
+  const todo = (data.sqlite || []).find(t => t.id == id);
   if (!todo) return;
   await fetch(`/api/todos/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      username,
       text: todo.text,
       description: todo.description,
       completed: 1
@@ -84,11 +86,16 @@ async function handleCheck(e) {
 async function handleDelete(e) {
   const id = e.target.getAttribute('data-id');
   await fetch(`/api/todos/${id}`, {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username })
+    method: 'DELETE'
   });
   fetchTodos();
 }
 
-if (taskList) window.onload = fetchTodos;
+fetch('/api/me')
+  .then(res => {
+    if (!res.ok) window.location.href = '/auth';
+    return res.json();
+  })
+  .then(data => {
+    fetchTodos();
+  });

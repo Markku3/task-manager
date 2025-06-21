@@ -1,18 +1,22 @@
-// ...existing code...
 const taskListActive = document.getElementById('task-list-active');
 const taskListDone = document.getElementById('task-list-done');
-const username = localStorage.getItem('currentUser');
 
-if (!username) window.location.href = '/auth';
+fetch('/api/me')
+  .then(res => {
+    if (!res.ok) window.location.href = '/auth';
+    return res.json();
+  })
+  .then(data => {
+    fetchTodos();
+  });
 
 async function fetchTodos() {
-    const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+    const res = await fetch('/api/todos');
     const data = await res.json();
     renderTodos(data.sqlite || []);
 }
 
 function renderTodos(todos) {
-    console.log('Todos:', todos); // Add this line
     taskListActive.innerHTML = '';
     taskListDone.innerHTML = '';
     todos.forEach(todo => {
@@ -43,10 +47,8 @@ function renderTodos(todos) {
         }
     });
 
-    // Attach event listeners for all delete buttons (both lists)
     document.querySelectorAll('.delete-btn').forEach(btn =>
         btn.addEventListener('click', handleDelete));
-    // Only attach edit and checkbox for active tasks
     document.querySelectorAll('.edit-btn').forEach(btn =>
         btn.addEventListener('click', handleEdit));
     document.querySelectorAll('.task-checkbox').forEach(cb =>
@@ -64,16 +66,14 @@ function escapeHtml(str) {
 async function handleDelete(e) {
     const id = e.target.getAttribute('data-id');
     await fetch(`/api/todos/${id}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username })
+        method: 'DELETE'
     });
     fetchTodos();
 }
 
 async function handleEdit(e) {
     const id = e.target.getAttribute('data-id');
-    const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+    const res = await fetch('/api/todos');
     const data = await res.json();
     const todo = (data.sqlite || []).find(t => t.id == id);
     if (!todo) return;
@@ -84,7 +84,6 @@ async function handleEdit(e) {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                username,
                 text: newTitle,
                 description: newDesc !== null ? newDesc : todo.description,
                 completed: todo.completed
@@ -96,7 +95,7 @@ async function handleEdit(e) {
 
 async function handleCheck(e) {
     const id = e.target.getAttribute('data-id');
-    const res = await fetch(`/api/todos?username=${encodeURIComponent(username)}`);
+    const res = await fetch('/api/todos');
     const data = await res.json();
     const todo = (data.sqlite || []).find(t => t.id == id);
     if (!todo) return;
@@ -104,7 +103,6 @@ async function handleCheck(e) {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            username,
             text: todo.text,
             description: todo.description,
             completed: 1
@@ -112,7 +110,4 @@ async function handleCheck(e) {
     });
     fetchTodos();
 }
-
-window.onload = fetchTodos;
-// ...existing code...
 

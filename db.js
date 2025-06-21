@@ -1,5 +1,6 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('database.sqlite');
+const sqlite3 = require("sqlite3");
+const sql3 = sqlite3.verbose();
+const db = new sql3.Database('database.sqlite');
 
 db.serialize(() => {
   db.run(`

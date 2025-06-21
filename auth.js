@@ -39,7 +39,10 @@ authForm.onsubmit = async function (e) {
   if (data.error) {
     authError.textContent = data.error;
     authError.style.display = '';
-  } 
+  } else {
+    window.location.href = '/index';
+    console.log('Successul login:', data.message);
+  }
 
   
 };

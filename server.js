@@ -4,6 +4,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const path = require('path');
 const sqliteDb = require('./db');
+const session = require('express-session');
 require('dotenv').config();
 
 const app = express();
@@ -23,6 +24,12 @@ const User = mongoose.model('User', userSchema);
 
 app.use(cors());
 app.use(express.json());
+app.use(session({
+  secret: 'your-secret-key', // use a strong secret in production!
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false } // set to true if using HTTPS
+}));
 
 // Set view engine to EJS
 app.set('view engine', 'ejs');
@@ -35,6 +42,7 @@ app.use(express.static(__dirname));
 app.get('/', (req, res) => res.render('index'));
 app.get('/auth', (req, res) => res.render('auth'));
 app.get('/personal', (req, res) => res.render('personal'));
+app.get('/index', (req, res) => res.render('index'));
 
 // --- MongoDB Todo schema/model (after userSchema) ---
 const todoSchema = new mongoose.Schema({
@@ -57,40 +65,28 @@ function getSqliteUserId(username) {
 }
 
 // --- GET all todos for user ---
-app.get('/api/todos', async (req, res) => {
-  const username = req.query.username;
-  if (!username) return res.status(400).json({ error: 'Missing username' });
-  try {
-    // MongoDB
-    const user = await User.findOne({ username });
-    const mongoTodos = user ? await Todo.find({ userId: user._id }).lean() : [];
-    // SQLite
-    const sqliteUserId = await getSqliteUserId(username);
-    sqliteDb.all('SELECT * FROM todos WHERE user_id = ?', [sqliteUserId], (err, rows) => {
-      if (err) return res.status(500).json({ error: 'SQLite error' });
-      res.json({ mongo: mongoTodos, sqlite: rows });
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.toString() });
-  }
+app.get('/api/todos', (req, res) => {
+  if (!req.session.user) return res.status(401).json({ error: 'Not authenticated' });
+  const sqliteUserId = req.session.user.id;
+  sqliteDb.all('SELECT * FROM todos WHERE user_id = ?', [sqliteUserId], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.toString() });
+    res.json({ sqlite: rows });
+  });
 });
 
 // --- CREATE todo ---
 app.post('/api/todos', async (req, res) => {
-  const { username, text, description = '' } = req.body;
-  if (!username || !text) return res.status(400).json({ error: 'Missing fields' });
+  if (!req.session.user) return res.status(401).json({ error: 'Not authenticated' });
+  const { text, description = '' } = req.body;
+  if (!text) return res.status(400).json({ error: 'Missing fields' });
   try {
-    // MongoDB
-    const user = await User.findOne({ username });
-    const mongoTodo = user ? await Todo.create({ userId: user._id, text, description, completed: false }) : null;
-    // SQLite
-    const sqliteUserId = await getSqliteUserId(username);
+    const sqliteUserId = req.session.user.id;
     sqliteDb.run(
       'INSERT INTO todos (user_id, text, description, completed) VALUES (?, ?, ?, 0)',
       [sqliteUserId, text, description],
       function (err) {
         if (err) return res.status(500).json({ error: 'SQLite error' });
-        res.json({ mongo: mongoTodo, sqlite: { id: this.lastID, user_id: sqliteUserId, text, description, completed: 0 } });
+        res.json({ sqlite: { id: this.lastID, user_id: sqliteUserId, text, description, completed: 0 } });
       }
     );
   } catch (err) {
@@ -100,59 +96,42 @@ app.post('/api/todos', async (req, res) => {
 
 // --- UPDATE todo ---
 app.put('/api/todos/:id', async (req, res) => {
+  if (!req.session.user) return res.status(401).json({ error: 'Not authenticated' });
   const { id } = req.params;
-  const { username, text, description, completed } = req.body;
-  if (!username || !text) return res.status(400).json({ error: 'Missing data' });
+  const { text, description, completed } = req.body;
+  if (!text) return res.status(400).json({ error: 'Missing data' });
 
-  try {
-    // Get user_id from SQLite
-    sqliteDb.get('SELECT id FROM users WHERE username = ?', [username], (err, user) => {
-      if (err || !user) return res.status(404).json({ error: 'User not found' });
-
-      sqliteDb.run(
-        `UPDATE todos SET text = ?, description = ?, completed = ? WHERE id = ? AND user_id = ?`,
-        [text, description, completed, id, user.id],
-        function (err) {
-          if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Failed to update todo' });
-          }
-          res.json({ success: true });
-        }
-      );
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
-  }
+  const sqliteUserId = req.session.user.id;
+  sqliteDb.run(
+    `UPDATE todos SET text = ?, description = ?, completed = ? WHERE id = ? AND user_id = ?`,
+    [text, description, completed, id, sqliteUserId],
+    function (err) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Failed to update todo' });
+      }
+      res.json({ success: true });
+    }
+  );
 });
 
 // --- DELETE todo ---
 app.delete('/api/todos/:id', async (req, res) => {
+  if (!req.session.user) return res.status(401).json({ error: 'Not authenticated' });
   const { id } = req.params;
-  const { username } = req.body;
-  if (!username) return res.status(400).json({ error: 'Missing username' });
+  const sqliteUserId = req.session.user.id;
 
-  try {
-    sqliteDb.get('SELECT id FROM users WHERE username = ?', [username], (err, user) => {
-      if (err || !user) return res.status(404).json({ error: 'User not found' });
-
-      sqliteDb.run(
-        `DELETE FROM todos WHERE id = ? AND user_id = ?`,
-        [id, user.id],
-        function (err) {
-          if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Failed to delete todo' });
-          }
-          res.json({ success: true });
-        }
-      );
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
-  }
+  sqliteDb.run(
+    `DELETE FROM todos WHERE id = ? AND user_id = ?`,
+    [id, sqliteUserId],
+    function (err) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Failed to delete todo' });
+      }
+      res.json({ success: true });
+    }
+  );
 });
 
 // API endpoints (unchanged)
@@ -178,6 +157,11 @@ app.post('/api/login', async (req, res) => {
     res.json({ message: 'Login successful', username });
 });
 
+// New endpoint to get current user info
+app.get('/api/me', (req, res) => {
+  if (!req.session.user) return res.status(401).json({ error: 'Not authenticated' });
+  res.json({ username: req.session.user.username });
+});
 
 // SQLite registration endpoint
 app.post('/api/sqlite/register', async (req, res) => {
@@ -211,9 +195,16 @@ app.post('/api/sqlite/login', (req, res) => {
       if (err || !user) return res.status(400).json({ error: 'Invalid credentials' });
       const match = await bcrypt.compare(password, user.password);
       if (!match) return res.status(400).json({ error: 'Invalid credentials' });
-      res.json({ message: 'Login successful (SQLite)', username });
+      req.session.user = { id: user.id, username: user.username };
+      res.json({ message: 'Login successful (SQLite)' });
     }
   );
+});
+
+app.post('/api/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.json({ success: true });
+  });
 });
 
 app.listen(3000, () => console.log('Server running on http://localhost:3000'));
