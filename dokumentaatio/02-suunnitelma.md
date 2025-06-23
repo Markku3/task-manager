@@ -110,3 +110,7 @@ Työntekijä käyttää sovellusta työtehtävien hallintaan. Hän voi muokata t
 | 4 | Testaus | Toiminnallisuuksien testaus, bugikorjaukset |
 | 5 | Dokumentointi | Käyttöohjeet, ylläpito, yms viimeistelyt
 
+
+## 🗓 Gantt-kaavio (viikkotasolla)
+
+![Gantt-kaavio](kuvat/gantt_kuva_viikkotasolla.png)
