@@ -2,7 +2,7 @@
 
 ## Asiakkaan tarpeet ja suunnittelun raamit
 
-### Miksi verkkopalvelu luodaan?
+### Miksi palvelu luodaan?
 
 To do -sovellus luodaan, jotta käyttäjät voivat hallita arjen ja työn tehtäviään yhdessä paikassa helposti ja turvallisesti. Monet käyttävät paperilappuja, muistikirjoja tai hajanaisia sovelluksia, mikä tekee tehtävien hallinnasta sekavaa ja tehotonta. Sovellus keskittää kaikki tehtävät yhteen näkymään ja mahdollistaa niiden tehokkaan hallinnan.
 
@@ -58,8 +58,8 @@ Sovelluksen tavoitteena on:
 
 ## Graafinen linjaus
 
-- **Ydinarvot:** Selkeys, helppokäyttöisyys, moderni ilme
-- **Väripaletti:** Vaalea pohja, korostevärit tehtävien tilan mukaan
+- **Ydinarvot:** Selkeys, helppokäyttöisyys, moderni/futuristimem ilme
+- **Väripaletti:** Tumma pohja, korostevärit tehtävien tilan mukaan
 - **Typografia:** Selkeät ja helposti luettavat fontit
 - **Kuvakkeet:** Yksinkertaiset ikonit tehtävien tilan ja toimintojen ilmaisemiseen
 
@@ -105,8 +105,8 @@ Työntekijä käyttää sovellusta työtehtävien hallintaan. Hän voi muokata t
 | Viikko | Vaihe | Tehtävät |
 |---|---|---|
 | 1 | Suunnittelu | Vaatimusten määrittely, ulkoasun suunnittelu |
-| 2 | Backend | Tietokanta, API, autentikointi |
-| 3 | Frontend | Käyttöliittymä, tehtävien hallinta |
+| 2 | Frontend | Käyttöliittymä, tehtävien hallinta |
+| 3 | Backend | Tietokanta, API, autentikointi |
 | 4 | Testaus | Toiminnallisuuksien testaus, bugikorjaukset |
 | 5 | Dokumentointi | Käyttöohjeet, ylläpito, yms viimeistelyt
 
