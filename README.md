@@ -1,126 +1,31 @@
-# 📝 To-do-sovellus – Näyttötyö
-
-## 👤 Tekijä
-
-- **Nimi:** Mariel H
-- **Koulutus:** Taitotalo / ICT, WEB14
-- **Ajankohta:** 26.06.2025
+# 📝 Tehtävienhallintasovellus – Projektin dokumentaatio
 
 ---
 
-## 🔍 Projektin kuvaus
+<div align="center">
 
-Tämä on to-do-sovellus, jonka avulla käyttäjät voivat:
+<img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" width="100" alt="Task Icon" />
 
-- Rekisteröityä ja kirjautua sisään
-- Lisätä tehtäviä (task)
-- Merkitä tehtäviä tehdyiksi
-- Muokata tai poistaa tehtäviä
-- Tarkastella aktiivisia ja tehtyjä tehtäviä omalla sivullaan
+**Yksinkertainen ja moderni tehtävienhallintasovellus**  
+CRUD-toiminnot • Käyttäjätunnukset • SQLite • Responsiivinen käyttöliittymä
 
-Sovelluksessa on hampurilaisvalikko, joka näyttää käyttäjänimen ja tarjoaa uloskirjautumismahdollisuuden.
+</div>
 
 ---
 
-## 🧭 Palvelun tarkoitus ja käyttäjät
+## 📑 Sisällysluettelo
 
-[Tarkoitus Tiivistettynä](kuvat/PalvelunTarkoitus.md)
----
-
-## 🧱 Käytetyt teknologiat
-
-| Osa                | Teknologia                        |
-| ------------------ | --------------------------------- |
-| Frontend           | EJS / HTML + CSS + JS         |
-| Backend            | Node.js + Express                 |
-| Autentikointi      | SQL                               |
-| Taskien tallennus  | MongoDB                           |
-| Versionhallinta    | Git + GitHub                      |
-| Kehitysympäristö   | Visual Studio Code                |
+| 📄 | Osa | Linkki |
+|----|-----|--------|
+| 1️⃣ | **Johdanto** | [01-johdanto.md](./dokumentaatio/01-johdanto.md) |
+| 2️⃣ | **Suunnitelma** | [02-suunnitelma.md](./dokumentaatio/02-suunnitelma.md) |
+| 3️⃣ | **Työnvaiheet** | [03-työnvaiheet.md](./dokumentaatio/03-työnvaiheet.md) |
+| 4️⃣ | **Käyttöönotto** | [04-käyttöönotto.md](./dokumentaatio/04-käyttöönotto.md) |
+| 5️⃣ | **Ylläpito-ohjeet** | [05-ylläpito-ohjeet.md](./dokumentaatio/05-ylläpito-ohjeet.md) |
+| 6️⃣ | **Lähteet & Liitteet** | [06-lähteet-liitteet.md](./dokumentaatio/06-lähteet-liitteet.md) |
+| 7️⃣ | **Itsearviointi** | [07-itsearviointi.md](./dokumentaatio/07-itsearviointi.md) |
+| 8️⃣ | **Raportti tekoälyn käytöstä** | [08-raportti-tekoälyn-käytöstä.md](./dokumentaatio/08-raportti-tekoälyn-käytöstä.md) |
 
 ---
 
-## ⚙️ CRUD-toiminnot
-
-| Toiminto | Kuvaus                                          |
-| -------- | ----------------------------------------------- |
-| Create   | Käyttäjä voi lisätä uuden tehtävän              |
-| Read     | Tehtävät listataan aktiivisina ja tehtyinä      |
-| Update   | Tehtävää voi muokata ja merkitä tehdyksi        |
-| Delete   | Tehtävä voidaan poistaa (aktiivinen tai valmis) |
-
----
-
-## 🧭 Käyttöliittymä
-
-- **Etusivu:** Rekisteröityminen ja kirjautuminen
-- **Tehtäväsivu:** Taskin lisääminen ja listaaminen
-- **Personal Info -sivu:** Näyttää aktiiviset ja valmiit tehtävät, mahdollisuus muokata ja poistaa
-- **Hampurilaismenu:** Käyttäjänimi ja logout
-
----
-
-## 🔐 Tietoturva
-
-- Käyttäjän tunnistaminen SQL-tietokannan kautta
-- Tehtävät näkyvät vain kirjautuneelle käyttäjälle
-- MongoDB tallentaa tehtävät käyttäjäkohtaisesti
-- Logout-toiminto tyhjentää session/tokenin
-
----
-
-## 🤝 Työskentely ohjelmistokehitystiimissä
-
-- Sopiminen tehtävistä
-- Yhteinen suunnittelu ja toteutuksen aikataulutus
-- Yhdessä testaus ja virheiden ratkaisu
-- Oman roolin arviointi ja jatkuva kehitys
-
----
-
-## 🧠 Oppiminen ja arviointi
-
-- Opin yhdistämään SQL ja MongoDB samaan projektiin
-- Opin käyttöliittymän ja toiminnallisuuden yhteensovittamista
-- Kehitin taitojani versioinnissa ja virheenkorjauksessa
-- Ymmärsin paremmin tietoturvan ja käyttäjähallinnan merkityksen
-
----
-
-## 📸 Kuvakaappauksia
-
-## 🖼️ Kuvia sovelluksesta
-
-### 🔐 Kirjautumissivu
-![Kirjautumissivu](kuvat/etusivu.png)
-
-### 🔐 Etusivu
-![Etusivu](kuvat/taskSivu.png)
-
-### ➕ Uuden tehtävän lisääminen
-![Lisääminen](kuvat/edit.png)
-
-### 📋 Personal Info -sivu
-![Admin](kuvat/personal.png)
-
-### 📋 Hampurilaismenu
-![Hamppari](kuvat/hamppari.png)
-
-```
-
----
-
-## 🚀 Sovelluksen käynnistäminen
-
-```bash
-git clone https://github.com/Markku3/task-manager.git
-cd projekti
-npm install
-npm start
-```
-
----
-
-## 🏁 Yhteenveto
-
-Tämä sovellus on näyttöni ohjelmoinnista ja ohjelmistokehittäjänä toimimisesta. Se kattaa tekniset taidot, käyttäjäkokemuksen sekä CRUD- ja tietoturvanäkökulmat.
+> **Syvenny dokumentaatioon yllä olevista linkeistä ja tutustu projektin kaikkiin osa-alueisiin!**
