@@ -26,10 +26,6 @@ Tämän to do -sovellusprojektin tavoitteena on:
   * Harjoitella Node.js-, Express- ja SQLite-teknologioiden käyttöä
   * Kehittää projektinhallinta- ja käyttöjärjestelmiä
 
-## 🗓 Gantt-kaavio (viikkotasolla)
-
-![Muokkaaminen](../kuvat/gantt_kuva_viikkotasolla.png)
-
 ## 🗓 Ulkonäkö 
 
 ![Kirjautuminen](../kuvat/etusivu.png)
