@@ -113,4 +113,4 @@ Työntekijä käyttää sovellusta työtehtävien hallintaan. Hän voi muokata t
 
 ## 🗓 Gantt-kaavio (viikkotasolla)
 
-![Gantt-kaavio](kuvat/gantt_kuva_viikkotasolla.png)
+![Gantt-kaavio](../kuvat/gantt_kuva_viikkotasolla.png)
