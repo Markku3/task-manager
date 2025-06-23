@@ -24,7 +24,7 @@ Tämän to do -sovellusprojektin tavoitteena on:
 * **Henkilökohtaiset tavoitteet:**
   * Syventää ymmärrystä web-sovellusten kehittämisestä
   * Harjoitella Node.js-, Express- ja SQLite-teknologioiden käyttöä
-  * Kehittää projektinhallinta- ja
+  * Kehittää projektinhallinta- ja käyttöjärjestelmiä
 
 ## 🗓 Gantt-kaavio (viikkotasolla)
 
