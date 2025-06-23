@@ -108,4 +108,5 @@ Työntekijä käyttää sovellusta työtehtävien hallintaan. Hän voi muokata t
 | 2 | Backend | Tietokanta, API, autentikointi |
 | 3 | Frontend | Käyttöliittymä, tehtävien hallinta |
 | 4 | Testaus | Toiminnallisuuksien testaus, bugikorjaukset |
-| 5 | Dokumentointi | Käyttöohjeet, ylläpito-
+| 5 | Dokumentointi | Käyttöohjeet, ylläpito, yms viimeistelyt
+
