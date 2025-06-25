@@ -1,51 +1,41 @@
-# Raportti tekoälyn käytöstä
+## Tekoälyn käyttö projektissa
 
-## Tekoälyn käyttöön liittyvät tavoitteet
+Tässä projektissa tekoälyä hyödynnettiin monipuolisesti sisällöntuotannossa ja ideoinnissa:
 
-Tavoitteeni tekoälyn käytölle tässä projektissa olivat:
-- Nopeuttaa tekstien, ohjeiden ja täyteaineiston tuottamista
-- Helpottaa käännösten tekemistä
-- Avustaa tuotekuvausten ja käyttöliittymätekstien luonnissa
-- Luoda muutamia kuvia tekoälyllä
+---
 
-Tekoäly auttoi saavuttamaan nämä tavoitteet nopeuttamalla työskentelyä ja parantamalla tekstien laatua. Suunnittelin käyttäväni tekoälyä erityisesti niissä tehtävissä, joissa siitä oli eniten hyötyä, mutta halusin myös oppia ratkaisemaan teknisiä ongelmia itse.
+### Tavoitteet
 
-## Tekoälyn valinta ja valinnan perustelu
+Tavoitteena oli käyttää tekoälyä käännöksissä (terminologiaa), koodien ja kokonaskuvan/skenaarioiden luonnissa. Halusin nopeuttaa työskentelyä ja varmistaa projektin onnistumisen, mutta teknisissä ongelmissa keskityin ensiksi omaan oppimiseen ja opiskeluun ja vasta sen jälkeen tukeuduin tekoälyyn.
 
-Valitsin seuraavat tekoälytyökalut:
-- **Gemini 1.5 Flash**: nopeaan tekstin tuottamiseen ja selityksiin
-- **Gemma 2 9B**: kun tarvitsin pidempää kontekstia ja johdonmukaisuutta
-- **DeepL Translate**: laadukkaisiin käännöksiin
-- **Fooocus AI** (Stable Diffusion XL + Gradio): kuvien tekoon
+---
 
-Valinnat perustuivat työkalujen ilmaisuuteen, laatuun ja käyttökokemukseen.
+###  Valinnat ja perustelut
 
-## Tekoälyn käyttöönotto ja soveltaminen
+- **Tekstin tuottaminen:** [Copilot](https://copilot.microsoft.com)  – ilmainen, nopea ja tehokas erityisesti selityksissä ja tekstin ideoinnissa.
+                        ** [ChatGPT](https://chatgpt.com) – ilmainen, nopea ja tehokas erityisesti selityksissä ja tekstin ideoinnissa.
+- **Kontekstin luonti:** [Copilot](https://copilot.microsoft.com) – esim GDPR, input palkit.
+                      ** [ChatGPT](https://chatgpt.com) esim GDPR, input palkit.
+- **Käännökset:** [Copilot](https://copilot.microsoft.com) – validit käännökset.
 
-Käytin tekoälyä mm. seuraavasti:
-- Pyysin apua täyte- ja käyttöliittymätekstien laatimiseen
-- Käänsin tekstejä DeepL:llä ja muokkasin tuloksia tarpeen mukaan
-- Loihdin tuotekuvia Fooocus AI:lla promptien avulla
-- Ratkaisin kontekstiongelmia vaihtamalla mallia (esim. Gemini → Gemma)
+---
 
-Haasteena oli joskus mallien kontekstin unohtaminen, jonka ratkaisin käyttämällä paikallista mallia (Gemma 2 9B LM Studiossa).
+### 📈 Tulokset ja analyysi
 
-## Tulokset ja tulosten analyysi
+Tekoäly nopeutti työskentelyä ja paransi koodin laatua. Selkeät ja yksinkertaiset ohjeet tuottivat parhaan lopputuloksen. Tekoälyn avulla sain aikaan selkeämmät raamit ja työskentelyprosessin.
 
-Tekoäly nopeutti työskentelyä ja paransi tekstien laatua. Ohjeistusten ja pyyntöjen pitäminen selkeinä auttoi saamaan hyviä tuloksia. Tekoäly mahdollisti myös visuaalisen sisällön tuottamisen nopeasti.
+---
 
-## Reflektio ja oma oppiminen
+### 🔍 Reflektio ja oppiminen
 
-Tekoälyn käyttö oli tuttua, mutta opin entistä paremmin hyödyntämään eri mallien vahvuuksia. Suosittelen muille opiskelijoille selkeiden ohjeiden antamista malleille ja mallien toimintaperiaatteisiin perehtymistä, jotta saa parhaan hyödyn irti.
+Tekoälyn käyttö oli sujuvaa, koska olin jo aiemmin käyttänyt vastaavia työkaluja. Suosittelen muille opiskelijoille mallien toimintaperiaatteisiin perehtymistä ja selkeiden ohjeiden antamista. Mallinhallintaohjelmien käyttö kannattaa opetella, jotta tekoälystä saa parhaan hyödyn. Kuitenkin on hyvä muistaa, että siihen ei kannata nojata täysin, ettei itseoppiminen lopu. Myös tietoturvasyistä työelämässä sen käyttö voi olla rajattua, joten tämän olemassaoloon ei kannata sokeasti uskoa.
 
-## Liitteet, lähteet ja linkit
+## 🗓 Tekoälyn käyttö 
 
-- [Gemini 1.5 Flash](https://gemini.google.com/app?hl=fi)
-- [DeepL Translate](https://www.deepl.com/en/translator)
-- [Fooocus AI](https://github.com/lllyasviel/Fooocus)
-- [Gradio](https://www.gradio.app)
-- [Gemma 2 9B](https://lmstudio.ai/model/gemma-2-9b)
-- [LM Studio](https://lmstudio.ai)
-- [Pinokio](https://pinokio.computer) (ei käytetty tässä projektissa, mutta suositeltava kuvamallien hallintaan)
+![AI](../kuvat/ai.PNG)
 
-Kuvakaappaukset ja koodinäytteet liitetty erikseen.
+![AI](../kuvat/ai1.PNG)
+
+![AI](../kuvat/ai2.PNG)
+
+![AI](../kuvat/ai3.PNG)
