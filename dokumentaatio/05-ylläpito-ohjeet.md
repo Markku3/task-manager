@@ -10,7 +10,7 @@
 ### 2. Käyttäjien hallinta
 
 * **Käyttäjätunnukset:** Käyttäjät voivat rekisteröityä ja kirjautua itse. Tarvittaessa voit poistaa käyttäjiä suoraan tietokannasta (esim. SQLite-työkalulla tai GDPR sivulla olevasta sähköpostista). HUOM. tulevaisuuden projektissa voi luoda käyttäjälle mahdollisuuden myös poistaa itse tilinsä.
-* **Salasanojen turvallisuus:** Salasanat tallennetaan hashattuina, eikä niitä voi palauttaa näkyviin.
+* **Salasanojen turvallisuus:** Salasanat tallennetaan hashattuina, eikä niitä voi palauttaa näkyviin. HUOM. projektin vapaa-ajalla kehittäessä, tulevaisuudessa salasanaan voisi lisätä turvasyistä kriteereitä (kuten esim. salasanan pituus ja symboleita).
 
 ### 3. Sovelluksen päivitykset
 
