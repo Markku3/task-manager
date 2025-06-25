@@ -43,6 +43,9 @@ app.get('/', (req, res) => res.render('index'));
 app.get('/auth', (req, res) => res.render('auth'));
 app.get('/personal', (req, res) => res.render('personal'));
 app.get('/index', (req, res) => res.render('index'));
+app.get('/gdpr', (req, res) => {
+    res.render('gdpr');
+});
 
 // --- MongoDB Todo schema/model (after userSchema) ---
 const todoSchema = new mongoose.Schema({

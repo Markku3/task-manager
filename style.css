@@ -219,6 +219,19 @@ footer {
     box-shadow: 0 0 6px #00ffe7;
 }
 
+.gdpr-text {
+    color: #a1e4f0;
+}
+
+.footer-link-gdpr {
+    color: #4d7a76;
+    font-size: 0.92em;
+}
+
+.footer-link-personal {
+    color: #00ffe7; 
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 18px 6px 20px 6px;
