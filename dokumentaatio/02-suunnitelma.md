@@ -22,7 +22,7 @@ Sovelluksen tavoitteena on:
    - Vähentää unohduksia ja parantaa ajanhallintaa.
 
 2. **Parantaa käyttäjäkokemusta:**
-   - Tarjota selkeä ja helppokäyttöinen käyttöliittymä (WCAG-standardit, saavutettavuuden testaus WebAim).
+   - Tarjota selkeä ja helppokäyttöinen käyttöliittymä (WCAG-standardit, saavutettavuuden testaus WebAim & Lighthouse).
    - Mahdollistaa tehtävien merkitseminen tehdyksi ja niiden erottelu aktiivisiin ja valmiisiin.
 
 3. **Turvallisuus ja yksityisyys:**
@@ -116,3 +116,8 @@ Työntekijä käyttää sovellusta työtehtävien hallintaan. Hän voi muokata t
 
 ![Värikontrasti](../kuvat/color.PNG)
 ![Värikontrasti](../kuvat/color2.PNG)
+
+
+## 🗓 Saavutettavuus - Lighthouse
+
+![Värikontrasti](../kuvat/lighthouse.PNG)
