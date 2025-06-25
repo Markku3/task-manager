@@ -8,14 +8,14 @@
 
 ## Vaihe 2: Kehitysympäristön valmistelu
 
-- Luotiin Node.js-projekti ja asennettiin tarvittavat paketit (Express, SQLite, EJS, bcrypt).
+- Luotiin Node.js-projekti ja asennettiin tarvittavat paketit (Express, SQLite, EJS, bcrypt, yms).
 - Rakennettiin tietokanta ja alustavat reitit.
 
 ## Vaihe 3: Toiminnallisuuksien toteutus
 
-- Toteutettiin käyttäjän rekisteröinti ja kirjautuminen.
 - Rakennettiin tehtävien lisääminen, muokkaaminen, merkitseminen tehdyksi ja poistaminen.
 - Erotteltiin aktiiviset ja valmiit tehtävät.
+- Toteutettiin käyttäjän rekisteröinti ja kirjautuminen.
 
 ## Vaihe 4: Testaus ja optimointi
 
@@ -31,4 +31,4 @@
 ---
 
 **Yhteenveto:**  
-Projektin työvaiheet etenivät suunnittelusta toteutukseen ja testaukseen. Ulkoasun ja toiminnallisuuksien rakentaminen sujui vaiheittain, ja kehityksen aikana tehtiin pieniä parannuksia käytettävyyteen ja tietoturvaan. Lopuksi
+Projektin työvaiheet etenivät suunnittelusta toteutukseen ja testaukseen. Ulkoasun ja toiminnallisuuksien rakentaminen sujui vaiheittain, ja kehityksen aikana tehtiin pieniä parannuksia käytettävyyteen ja tietoturvaan. 
