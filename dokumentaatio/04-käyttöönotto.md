@@ -8,13 +8,13 @@ Sovelluksen julkaisu vaatii teknistä osaamista, joten kehittäjä vastaa julkai
 
 ## Osapuolten roolit
 
-**Sinun roolisi (asiakas):**
-- **Testaus:** Testaa valmis sovellus huolellisesti ja anna palautetta.
-- **Hyväksyntä:** Kun olet tyytyväinen, hyväksy sovelluksen julkaisu.
+**Asiakkaan rooli:**
+- **Testaus:** Testaa valmiin sovelluksen huolellisesti ja antaa palautetta.
+- **Hyväksyntä:** Kun on tyytyväinen, hyväksyy sovelluksen julkaisun.
 
 **Kehittäjän rooli:**
 - **Valmistelu:** Valmistelee sovelluksen julkaistavaksi.
-- **Julkaisu:** Julkaisee sovelluksen palvelimelle.
+- **Julkaisu:** Julkaisee sovelluksen palvelimelle (voi olla myös 'dummy' -sivu ensin pystyssä).
 - **Tuki:** Tarjoaa tukea käyttöönoton aikana ja sen jälkeen.
 
 ## Julkaisuprosessi (yhteenveto)
