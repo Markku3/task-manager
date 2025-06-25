@@ -4,7 +4,7 @@
 
 ### 1. Tehtävien hallinta
 
-* **Tehtävien muokkaus:** Käyttäjät voivat lisätä, muokata, merkitä tehdyksi ja poistaa omia tehtäviään sovelluksen käyttöliittymässä.
+* **Tehtävien muokkaus:** Käyttjät voivat lisätä, muokata, merkitä tehdyksi ja poistaa omia tehtäviään sovelluksen käyttöliittymässä.
 * **Tietokannan varmistus:** Varmista säännöllisesti, että `database.sqlite`-tiedosto on tallessa ja siitä on varmuuskopio.
 
 ### 2. Käyttäjien hallinta
