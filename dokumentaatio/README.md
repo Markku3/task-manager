@@ -24,7 +24,7 @@ CRUD-toiminnot • Käyttäjätunnukset • SQLite • Responsiivinen käyttöli
 | 5️⃣ | **Ylläpito-ohjeet** | [05-ylläpito-ohjeet.md](./dokumentaatio/05-ylläpito-ohjeet.md) |
 | 6️⃣ | **Lähteet & Liitteet** | [06-lähteet-liitteet.md](./dokumentaatio/06-lähteet-liitteet.md) |
 | 7️⃣ | **Itsearviointi** | [07-itsearviointi.md](./dokumentaatio/07-itsearviointi.md) |
-| 8️⃣ | **Raportti tekoälyn käytöstä** | [08-raportti-tekoälyn-käytöstä.md](./dokumentaatio/08-raportti-tekoälyn-käytöstä) |
+| 8️⃣ | **Raportti tekoälyn käytöstä** | [08-raportti-tekoälyn-käytöstä.md](./dokumentaatio/08-raportti-tekoälyn-käytöstä.md) |
 
 ---
 
