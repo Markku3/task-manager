@@ -64,7 +64,7 @@ Sovelluksen tavoitteena on:
 - Tehtävien deadline ja muistutukset
 - Tehtävien priorisointi ja kategorisointi
 - Synkronointi mobiililaitteiden kanssa
-- Tumma teema
+- kehittynyt tietoturva-aspekt (esim. XSS)
 
 ## Esteettömyys ja käytettävyys
 
