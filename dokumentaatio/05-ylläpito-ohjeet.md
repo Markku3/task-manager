@@ -34,12 +34,3 @@
 * **Turvallisuus:** Käytä vahvoja salasanoja ja pidä palvelin suojattuna.
 * **Käyttöohjeet:** Päivitä käyttö- ja ylläpito-ohjeita tarpeen mukaan.
 
----
-
-**Muista:**
-
-* **Dokumentaatio:** Hyödynnä projektin README.md-tiedostoa ja muita ohjeita.
-* **Yhteisö:** Tarvittaessa kysy apua Node.js- ja SQLite-yhteisöiltä.
-* **Varmuuskopiot:** Säännöllinen varmuuskopiointi on tärkeää tietojen säilyttämiseksi.
-
-**Näillä ohjeilla varmistat, että to do -sovelluksesi pysyy toimivana
