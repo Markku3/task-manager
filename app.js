@@ -23,8 +23,10 @@ function renderTodos(todos) {
     li.innerHTML = `
       <span class="task-title">${escapeHtml(todo.text)}</span>
       <span class="task-desc">${escapeHtml(todo.description || '')}</span>
-      <input type="checkbox" class="task-checkbox" data-id="${todo.id}" title="Mark as done">
-      <button data-id="${todo.id}" class="delete-btn">Delete</button>
+      <div class="task-actions">
+          <input type="checkbox" class="task-checkbox" data-id="${todo.id}" title="Mark as done">
+          <button data-id="${todo.id}" class="delete-btn">Delete</button>
+      </div>
     `;
     taskList.appendChild(li);
   });
