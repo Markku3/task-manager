@@ -114,5 +114,5 @@ Työntekijä käyttää sovellusta työtehtävien hallintaan. Hän voi muokata t
 
 ## 🗓 Saavutettavuus - Kontrasti
 
-![Värikontrasti](../kuvat/color)
-![Värikontrasti](../kuvat/color2)
+![Värikontrasti](../kuvat/color.png)
+![Värikontrasti](../kuvat/color2.png)
