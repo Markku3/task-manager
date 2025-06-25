@@ -22,7 +22,7 @@ Sovelluksen tavoitteena on:
    - Vähentää unohduksia ja parantaa ajanhallintaa.
 
 2. **Parantaa käyttäjäkokemusta:**
-   - Tarjota selkeä ja helppokäyttöinen käyttöliittymä (saavutettavuuden testaus WebAim).
+   - Tarjota selkeä ja helppokäyttöinen käyttöliittymä (WCAG-standardit, saavutettavuuden testaus WebAim).
    - Mahdollistaa tehtävien merkitseminen tehdyksi ja niiden erottelu aktiivisiin ja valmiisiin.
 
 3. **Turvallisuus ja yksityisyys:**
