@@ -3,7 +3,7 @@ const taskTitle = document.getElementById('task-title');
 const taskDesc = document.getElementById('task-desc');
 const taskList = document.getElementById('task-list');
 
-// Remove legacy localStorage keys except currentUser
+// Pois kaikki vanhat tallennetut tiedot localStoragesta, säästää currentUserin
 Object.keys(localStorage).forEach(key => {
   if (key !== 'currentUser') localStorage.removeItem(key);
 });
@@ -17,7 +17,7 @@ async function fetchTodos() {
 function renderTodos(todos) {
   taskList.innerHTML = '';
   todos.forEach(todo => {
-    if (Number(todo.completed) === 1) return; // Only show active (not done) todos
+    if (Number(todo.completed) === 1) return; // näyttää vain tekemättömät tehtävät
     const li = document.createElement('li');
     li.className = 'task-item';
     li.innerHTML = `
@@ -56,7 +56,7 @@ if (taskForm) {
   };
 }
 
-// Creating a todo:
+// Luo todoon:
 async function createTodo(text, description) {
   await fetch('/api/todos', {
     method: 'POST',
@@ -67,7 +67,7 @@ async function createTodo(text, description) {
 
 async function handleCheck(e) {
   const id = e.target.getAttribute('data-id');
-  // Get the todo to update its text/desc
+  // Todo updatee sen tekstin
   const res = await fetch('/api/todos');
   const data = await res.json();
   const todo = (data.sqlite || []).find(t => t.id == id);

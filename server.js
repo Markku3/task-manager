@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/naytto', 
     useUnifiedTopology: true
 });
 
-// --- Add User Schema/Model (UNCOMMENTED and in use!) ---
+
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     password: { type: String, required: true },
@@ -25,20 +25,20 @@ const User = mongoose.model('User', userSchema);
 app.use(cors());
 app.use(express.json());
 app.use(session({
-  secret: 'your-secret-key', // use a strong secret in production!
+  secret: 'your-secret-key', // tosi turvallinen avain huehue, vaihda jos julkaiset oikeasti
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } // set to true if using HTTPS
+  cookie: { secure: false } // aseta 'true' HTTPS:ssä
 }));
 
-// Set view engine to EJS
+// asetetaan view engine EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve all static files (JS, CSS, images)
+//(JS, CSS, images)
 app.use(express.static(__dirname));
 
-// Routing for pages
+// Reitit sivuille
 app.get('/', (req, res) => res.render('index'));
 app.get('/auth', (req, res) => res.render('auth'));
 app.get('/personal', (req, res) => res.render('personal'));
@@ -47,7 +47,7 @@ app.get('/gdpr', (req, res) => {
     res.render('gdpr');
 });
 
-// --- MongoDB Todo schema/model (after userSchema) ---
+//MongoDB Todo schema/model (after userSchema)
 const todoSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   text: { type: String, required: true },
@@ -57,7 +57,7 @@ const todoSchema = new mongoose.Schema({
 });
 const Todo = mongoose.model('Todo', todoSchema);
 
-// --- Helper: Get SQLite user_id from username ---
+// --- Get SQLite user_id käyttäjänimeltä aka username ---
 function getSqliteUserId(username) {
   return new Promise((resolve, reject) => {
     sqliteDb.get('SELECT id FROM users WHERE username = ?', [username], (err, row) => {
@@ -67,7 +67,7 @@ function getSqliteUserId(username) {
   });
 }
 
-// --- GET all todos for user ---
+// --- GET kaikki todot käyttäjille ---
 app.get('/api/todos', (req, res) => {
   if (!req.session.user) return res.status(401).json({ error: 'Not authenticated' });
   const sqliteUserId = req.session.user.id;
@@ -160,13 +160,13 @@ app.post('/api/login', async (req, res) => {
     res.json({ message: 'Login successful', username });
 });
 
-// New endpoint to get current user info
+// Uusi endpoint jotta saa tämänhetkisen käyttäjän tiedot
 app.get('/api/me', (req, res) => {
   if (!req.session.user) return res.status(401).json({ error: 'Not authenticated' });
   res.json({ username: req.session.user.username });
 });
 
-// SQLite registration endpoint
+// SQLite rekisteröinnin endpoint
 app.post('/api/sqlite/register', async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) return res.status(400).json({ error: 'Missing fields' });
@@ -188,7 +188,7 @@ app.post('/api/sqlite/register', async (req, res) => {
   }
 });
 
-// SQLite login endpoint
+// SQLite loginin endpointti
 app.post('/api/sqlite/login', (req, res) => {
   const { username, password } = req.body;
   sqliteDb.get(

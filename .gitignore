@@ -6,3 +6,5 @@ node_modules/
 
 # Ignore macOS system files
 .DS_Store
+
+#älä lähetä tätä githubiin drag&dropissa. Pointti kansiolla on juuri että se ei mene sinne...

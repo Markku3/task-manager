@@ -39,7 +39,7 @@
         </div>
     </div>
     <script>
-        // Show username in menu using session
+        // Vilkase käyttistä menussa käyttämälä sessiota
         document.addEventListener('DOMContentLoaded', async function() {
             const res = await fetch('/api/me');
             if (res.ok) {
@@ -50,7 +50,7 @@
             }
         });
 
-        // Sign out
+        // Sign out -button
         document.getElementById('signout-btn').onclick = async function() {
             await fetch('/api/logout', { method: 'POST' });
             window.location.href = '/auth';
