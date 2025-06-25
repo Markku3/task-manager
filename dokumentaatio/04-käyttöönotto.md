@@ -1,7 +1,5 @@
 # Käyttöönotto
 
-**Sovelluksen julkaisu on kehittäjän vastuulla.** Tämä varmistaa, että julkaisu sujuu teknisesti oikein ja kaikki osapuolet tietävät roolinsa.
-
 ## Julkaisu
 
 Sovelluksen julkaisu vaatii teknistä osaamista, joten kehittäjä vastaa julkaisusta sovittuun ympäristöön.
