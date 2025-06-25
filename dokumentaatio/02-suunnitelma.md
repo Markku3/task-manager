@@ -2,10 +2,6 @@
 
 ## Asiakkaan tarpeet ja suunnittelun raamit
 
-### Miksi palvelu luodaan?
-
-To do -sovellus luodaan, jotta käyttäjät voivat hallita arjen ja työn tehtäviään yhdessä paikassa helposti ja turvallisesti. Monet käyttävät paperilappuja, muistikirjoja tai hajanaisia sovelluksia, mikä tekee tehtävien hallinnasta sekavaa ja tehotonta. Sovellus keskittää kaikki tehtävät yhteen näkymään ja mahdollistaa niiden tehokkaan hallinnan.
-
 ### Kohderyhmä
 
 Kohderyhmänä ovat kaikki, jotka haluavat hallita omia tehtäviään digitaalisesti – opiskelijat, työntekijät, yrittäjät ja arjen kiireiset ihmiset.
