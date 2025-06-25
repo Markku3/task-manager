@@ -1,0 +1,100 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In - Task Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container { max-width: 350px; margin: 60px auto; }
+        .auth-form { display: flex; flex-direction: column; gap: 15px; }
+        .auth-form input { padding: 10px; border-radius: 6px; border: 1.5px solid #25263e; background: #23243c; color: #def; font-size: 1rem; }
+        .auth-form button { margin-top: 8px; }
+        .auth-toggle { color: #00ffe7; cursor: pointer; margin-top: 6px; text-align: center; }
+        .auth-note { color: #87e1ec; text-align: center; margin-bottom: 18px; }
+        .auth-error { color: #ff6d6d; text-align: center; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container glass auth-container">
+        <header>
+            <h1><span class="neon">Task Manager</span></h1>
+        </header>
+        <div id="auth-box">
+            <div class="auth-note">Sign up for a new account or sign in to continue.</div>
+            <form id="auth-form" class="auth-form">
+                <input type="text" id="auth-username" placeholder="Username" autocomplete="username" required>
+                <input type="password" id="auth-password" placeholder="Password" autocomplete="current-password" required>
+                <button type="submit" class="neon-btn" id="auth-btn">Sign In</button>
+            </form>
+            <div class="auth-toggle" id="toggle-link">Don't have an account? Sign up</div>
+        </div>
+        <div class="auth-error" id="auth-error" style="display:none;"></div>
+    </div>
+    <script>
+        // Redirect to index.html if already signed in
+        if (localStorage.getItem('currentUser')) {
+            window.location.href = 'index.html';
+        }
+
+        const authForm = document.getElementById('auth-form');
+        const authBtn = document.getElementById('auth-btn');
+        const toggleLink = document.getElementById('toggle-link');
+        const authError = document.getElementById('auth-error');
+        let mode = 'signin'; // or 'signup'
+
+        function showError(msg) {
+            authError.textContent = msg;
+            authError.style.display = 'block';
+        }
+
+        function clearError() {
+            authError.textContent = '';
+            authError.style.display = 'none';
+        }
+
+        toggleLink.onclick = function() {
+            if (mode === 'signin') {
+                mode = 'signup';
+                authBtn.textContent = 'Sign Up';
+                toggleLink.textContent = 'Already have an account? Sign in';
+            } else {
+                mode = 'signin';
+                authBtn.textContent = 'Sign In';
+                toggleLink.textContent = "Don't have an account? Sign up";
+            }
+            clearError();
+        };
+
+        authForm.onsubmit = function(e) {
+            e.preventDefault();
+            clearError();
+            const username = document.getElementById('auth-username').value.trim();
+            const password = document.getElementById('auth-password').value;
+            if (!username || !password) {
+                showError("Please fill in both fields.");
+                return;
+            }
+            let users = JSON.parse(localStorage.getItem('users') || '{}');
+            if (mode === 'signup') {
+                if (users[username]) {
+                    showError("Username already exists.");
+                    return;
+                }
+                users[username] = { password };
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('currentUser', username);
+                window.location.href = 'index.html';
+            } else {
+                if (!users[username] || users[username].password !== password) {
+                    showError("Incorrect username or password.");
+                    return;
+                }
+                localStorage.setItem('currentUser', username);
+                window.location.href = 'index.html';
+            }
+        };
+    </script>
+</body>
+</html>-->

@@ -1,0 +1,62 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="hamburger.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="hamburger-box">
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">&#9776;</button>
+            <div class="menu-dropdown" id="menuDropdown">
+                <span class="menu-username">User: <span id="current-user"></span></span>
+                <button class="menu-signout-btn" id="signout-btn">Sign Out</button>
+            </div>
+        </div>
+        <div class="container glass">
+            <header>
+                <h1><span class="neon">Task Manager</span></h1>
+            </header>
+            <form id="task-form">
+                <input type="text" id="task-title" placeholder="Task Title" required>
+                <input type="text" id="task-desc" placeholder="Task Description">
+                <button type="submit" class="neon-btn">Add Task</button>
+            </form>
+            <ul id="task-list"></ul>
+            <footer>
+                <p><a href="personal.html">Go to Personal Info</a></p>
+            </footer>
+        </div>
+    </div>
+    <script>
+        // Redirect to auth.html if not signed in
+        if (!localStorage.getItem('currentUser')) {
+            window.location.href = 'auth.html';
+        }
+        // Show username in menu
+        document.getElementById('current-user').textContent = localStorage.getItem('currentUser') || '';
+        // Sign out
+        document.getElementById('signout-btn').onclick = function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'auth.html';
+        };
+        // Hamburger menu dropdown logic
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const menuDropdown = document.getElementById('menuDropdown');
+        hamburgerBtn.onclick = function(e) {
+            menuDropdown.classList.toggle('show');
+            e.stopPropagation();
+        };
+        document.addEventListener('click', function(e) {
+            if (!menuDropdown.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+                menuDropdown.classList.remove('show');
+            }
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>-->

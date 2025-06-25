@@ -1,0 +1,65 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal Info - Task Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="hamburger.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="hamburger-box">
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">&#9776;</button>
+            <div class="menu-dropdown" id="menuDropdown">
+                <span class="menu-username">User: <span id="current-user"></span></span>
+                <button class="menu-signout-btn" id="signout-btn">Sign Out</button>
+            </div>
+        </div>
+        <div class="container glass">
+            <header>
+                <h1><span class="neon">Personal Info</span></h1>
+                <p class="note">You can see all your tasks below. Edit or delete active tasks. You can also delete completed tasks if you wish.</p>
+            </header>
+            <div>
+                <h2 class="section-title">Active Tasks</h2>
+                <ul id="task-list-active"></ul>
+            </div>
+            <div>
+                <h2 class="section-title">Completed Tasks</h2>
+                <ul id="task-list-done"></ul>
+            </div>
+            <footer>
+                <p><a href="index.html">Back to Task Page</a></p>
+            </footer>
+        </div>
+    </div>
+    <script>
+        // Redirect to auth.html if not signed in
+        if (!localStorage.getItem('currentUser')) {
+            window.location.href = 'auth.html';
+        }
+        // Show username in menu
+        document.getElementById('current-user').textContent = localStorage.getItem('currentUser') || '';
+        // Sign out
+        document.getElementById('signout-btn').onclick = function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'auth.html';
+        };
+        // Hamburger menu dropdown logic
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const menuDropdown = document.getElementById('menuDropdown');
+        hamburgerBtn.onclick = function(e) {
+            menuDropdown.classList.toggle('show');
+            e.stopPropagation();
+        };
+        document.addEventListener('click', function(e) {
+            if (!menuDropdown.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+                menuDropdown.classList.remove('show');
+            }
+        });
+    </script>
+    <script src="personal.js"></script>
+</body>
+</html>-->
