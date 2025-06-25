@@ -22,7 +22,7 @@ Sovelluksen tavoitteena on:
    - Vähentää unohduksia ja parantaa ajanhallintaa.
 
 2. **Parantaa käyttäjäkokemusta:**
-   - Tarjota selkeä ja helppokäyttöinen käyttöliittymä.
+   - Tarjota selkeä ja helppokäyttöinen käyttöliittymä (saavutettavuuden testaus WebAim).
    - Mahdollistaa tehtävien merkitseminen tehdyksi ja niiden erottelu aktiivisiin ja valmiisiin.
 
 3. **Turvallisuus ja yksityisyys:**
@@ -64,7 +64,7 @@ Sovelluksen tavoitteena on:
 - Tehtävien deadline ja muistutukset
 - Tehtävien priorisointi ja kategorisointi
 - Synkronointi mobiililaitteiden kanssa
-- kehittynyt tietoturva-aspekt (esim. XSS)
+- Kehittyneempi tietoturva-aspekt (esim. XSS)
 
 ## Esteettömyys ja käytettävyys
 
@@ -110,3 +110,9 @@ Työntekijä käyttää sovellusta työtehtävien hallintaan. Hän voi muokata t
 ## 🗓 Gantt-kaavio (viikkotasolla)
 
 ![Gantt-kaavio](../kuvat/gantt_kuva_viikkotasolla.png)
+
+
+## 🗓 Saavutettavuus - Kontrasti
+
+![Värikontrasti](../kuvat/color)
+![Värikontrasti](../kuvat/color2)
